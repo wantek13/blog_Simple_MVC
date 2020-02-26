@@ -1,0 +1,104 @@
+<?php 
+    $articleId = $_GET['id'];
+    $article = getArticleById($articleId, $bdd);
+    $comms = getCommsById($articleId, $bdd);
+
+    require 'views/_header.phtml';
+    require 'views/_menu.phtml';
+?>
+
+
+<div class="container">
+    <div id="empty" class="card" style="18rem">
+        <img class="card-img-top" src="<?php echo $article['img'] ?>" alt="card image">
+
+        <div class="card-body">
+            <h3>Info Article : <strong><?php echo $article['titre'] ?></strong></h3>
+            <!-- <a class="btn btn-secondary" href="update.php?id=<?php echo $article['id'] ?>">Modifier</a>
+            <a class="btn btn-danger" href="delete.php?id=<?php echo $article['id'] ?>">Supprimer</a> -->
+
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Titre: </th>
+                        <td><?php echo $article['titre'] ?></td>
+                    </tr>
+                    <tr>
+                        <th>Contenu: </th>
+                        <td><?php echo $article['contenu'] ?></td>
+                    </tr>
+                    <tr>
+                        <th>AddDate: </th>
+                        <td><?php echo $article['dateRedaction'] ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <!--formulaire ecrire commentaire-->
+            <form class="form-horizontal" action="commentaire?id=<?= $articleId ?>" method="post">
+            <fieldset>
+
+            <!-- Form Name -->
+            <legend>Commentaires </legend><i class="far fa-comments"></i><?= $nbComms ?>
+        </div>
+        <div class="card-body">
+            <!-- Textarea -->
+            <div class="form-group">
+            <div class="col-md-4">                     
+                <textarea class="form-control" id="textarea" name="comment">Entrez votre commentaire</textarea>
+            </div>
+            </div>
+
+            <?php if(!$_SESSION): ?>
+                <!--message d'erreur-->
+                <div class="alert alert-danger" role="alert">
+                    <?= 'vous devez vous <a href="login">connecter</a> ou <a href="register">créer un compte</a>' ?>
+                </div>
+            <?php else: ?>
+                <!-- Button -->
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <input type="hidden" name="postId" value="<?= $articleId ?>">
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Envoyer</button>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <?php 
+        if(isset($comms)):
+        while($data = $comms->fetch()): 
+    ?>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h4><?= $data['pseudoAuteur'] ?></h4>
+                    </div>
+                    <div class="col-lg-6">
+                    <p><?= $data['dateAjout'] ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+            <p><?= $data['contenu'] ?></p>
+            </div>
+        </div>
+
+    <?php 
+        endwhile;
+        endif; 
+    ?>
+
+</div>
+
+</home>
+</html>

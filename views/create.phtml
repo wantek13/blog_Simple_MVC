@@ -1,0 +1,41 @@
+<?php
+
+require 'views/_header.phtml';
+require 'views/_menu.phtml';
+
+?>
+
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Create Article</h4>
+	
+	<form action="" method="post">
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="far fa-image"></i> </span>
+		 </div>
+        <input name="img" class="form-control" placeholder="image" type="text">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-heading"></i> </span>
+		 </div>
+        <input name="titre" class="form-control" placeholder="Enter un titre" type="text">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fas fa-paragraph"></i> </span>
+		 </div>
+        <input name="contenu" class="form-control" placeholder="Enter le contenu" type="text">
+    </div> <!-- form-group// -->
+
+    <!-- Button -->
+    <div class="form-group">
+        <div class="col-md-4">
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Valider</button>
+        </div>
+    </div>
+                                                                   
+</form>
+</article>
+</div> <!-- card.// -->

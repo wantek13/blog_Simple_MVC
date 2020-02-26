@@ -1,0 +1,40 @@
+<?php 
+	require 'views/_header.phtml';
+    require 'views/_menu.phtml';
+?>
+
+<!----------------Sections--------------------------------->
+<p class="align-self-center mx-auto">
+	<a class="btn btn-success" href="create">Creer un article</a>
+</p>
+
+<div class="container">
+        <div class="row">
+		<?php foreach($articles as $article): ?>
+        
+        <div class="col-lg-6">
+            <div id="empty" class="card" style="18rem">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="350" src="<?php echo $article['img'] ?>" alt="card image">
+
+                <div class="card-body">
+                    <h3><strong><?php echo $article['titre'] ?></strong></h3>
+                    <!-- <a class="btn btn-secondary" href="update.php?id=<?php echo $article['id'] ?>">Modifier</a>
+                    <a class="btn btn-danger" href="delete.php?id=<?php echo $article['id'] ?>">Supprimer</a> -->
+                    <p><?php 
+                            $resume = $article['contenu'];
+                            echo substr($resume, 0, 300). '...';
+                        ?>
+                    </p>
+                    <p><?php echo $article['dateRedaction']. '' . $article['nbComms'] ?></p>
+                    <a href="article?id=<?= $article['id'] ?>" class="btn btn-primary">Voir plus</a>
+                </div>
+            </div>
+        
+        </div>
+        <?php endforeach; ?>
+        </div>
+</div>
+
+<!---------------FinSection--------------------------------->
+ </body>
+ </html>
